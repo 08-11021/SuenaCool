@@ -1,0 +1,64 @@
+<div class="col-lg-4">
+    <div class="pad form-adduser">
+
+            <div class="row">
+                <div class="col-sm-12">
+                <ol class="breadcrumb">
+                  <li ng-repeat="crumb in crumbs" class="clickable-button" ng-click="viewCategory(crumb)"><a>{{crumb.name}}</a></li>
+                </ol>
+                </div>
+                <div class="col-sm-12">
+                    <h2>{{$parent.category.name}}</h2>
+                </div>
+            </div>
+            <div class="row user-profile-category">
+              <div class="col-xs-6 text-bold">
+                Nombre:
+              </div>
+              <div class="col-xs-6">
+                  <input id="categoryName" ng-model="$parent.category.name" type="text" class="form-control repeat-pass first-input last-input" placeholder="Categoria" ng-disabled="!isManager">
+              </div>
+            </div>
+            <div ng-if="isManager" class="row user-profile-category">
+              <div  class="col-xs-12 text-bold">
+                <button id="updateButton" class="btn btn-lg btn-primary btn-block" ng-click="update()" type="button">Actualizar</button>
+              </div>
+
+            </div>
+            <div class="row user-profile-category">
+              <div class="col-xs-6 text-bold">
+                Subcategorias:
+              </div>
+              <div class="col-xs-6">
+              </div>
+            </div>
+            <div class="row user-profile-category" >
+            <div class="col-xs-12">
+                <center>
+                <table>
+                <tr ng-repeat="subcategory in categories">
+                    <td class ="clickable-button" ng-click="viewCategory(subcategory)">
+                        {{subcategory.name}}</td>
+                    <td ng-if="isManager">
+                        <center><div class="glyphicon glyphicon-remove-sign clickable-button" ng-click="deletesub(subcategory.id)" div></div></center>
+                    </td>
+                </tr>
+                </table>
+                </center>
+            </div>
+
+            </div>
+
+
+
+
+            <div ng-if="isManager" class="row">
+                <div class="col-sm-8">
+                   <input id="SubcategoryName" ng-model="$parent.$parent.subname" type="text" class="form-control repeat-pass first-input last-input" placeholder="Subcategoria">
+                </div>
+                <div class="col-sm-4">
+                   <button id="SubCategorySaveButton" class="btn btn-lg btn-primary btn-block" ng-click="saveSub()" type="button">Agregar</button>
+                </div>
+            </div>
+    </div>
+</div>

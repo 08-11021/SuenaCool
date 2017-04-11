@@ -1,0 +1,61 @@
+
+    <div class="col-lg-8 col-lg-push-2">
+        <div class="pad form-adduser form-addcategory ">
+                <div class="row">
+                    <div class="col-sm-8">
+                       <input id="name" ng-model="$parent.name" type="text" class="form-control repeat-pass first-input last-input" placeholder="Servicio">
+                    </div>
+                    <div class="col-sm-4">
+                       <button id="saveButton" class="btn btn-lg btn-primary btn-block" ng-click="save(currentNode.categoryName)" type="button">Solicitar</button>
+                    </div>
+                </div>
+            <div class="row user-profile-category">
+                <div class="col-sm-12">
+                <span style="color:black"><b>Categoria seleccionada: </b>{{currentNode.categoryName}}</span>
+                <h2>Seleccione la categoría asociada al servicio</h2>
+
+                        <!--
+                          [TREE attribute]
+                          angular-treeview: the treeview directive
+                          tree-model : the tree model on $scope.
+                          node-id : each node's id
+                          node-label : each node's label
+                          node-children: each node's children
+                        -->
+                        <div
+                          data-angular-treeview="true"
+                          data-tree-model="categoryList"
+                          data-node-id="categoryId"
+                          data-node-label="categoryName"
+                          data-node-children="children" >
+                        </div>
+                </div>
+            </div>
+        </div>
+            <table class="table">
+                <tr>
+                    <td>
+                        <b>Servicio solicitado</b>
+                    </td>
+                    <td>
+                        <b>Categoría</b>
+                    </td>                    
+                    <td>
+                        <center><b>Eliminar</b></center>
+                    </td>
+                </tr>
+
+                <tr ng-repeat="service in services">
+                    <td class ="clickable-button">
+                        {{service.name}}
+                    </td>
+                    <td class ="clickable-button">
+                        {{service.category}}
+                    </td>                    
+                    <td>
+                        <center><div class="glyphicon glyphicon-remove-sign clickable-button" ng-click="delete(service.id)" div></div></center>
+                    </td>
+                </tr>
+            </table>
+
+    </div>

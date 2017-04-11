@@ -1,0 +1,29 @@
+
+    <div class="col-lg-8 col-lg-push-2">
+        <table class="table">
+                <tr>
+                    <td>
+                        <b>Solicitante</b>
+                    </td>
+                    <td>
+                        <b>Servicio solicitado</b>
+                    </td>
+                    <td>
+                        <b>Categoría</b>
+                    </td>
+                </tr>
+
+                <tr ng-repeat="request in requests">
+                    <td class ="clickable-button">
+                        {{request.user}}
+                    </td>
+                    <td class ="clickable-button">
+                        {{request.name}}
+                    </td>
+                    <td class ="clickable-button">
+                        {{request.category}}
+                    </td>
+                </tr>
+            </table>
+
+    </div>

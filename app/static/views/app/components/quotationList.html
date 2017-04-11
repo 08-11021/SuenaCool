@@ -1,0 +1,41 @@
+<center>
+    <div class="col-lg-8">
+        <table class="table">
+            <tr>
+                <td>
+                    <b>Servicio</b>
+                </td>
+                <td>
+                    <b>Cliente</b>
+                </td>
+                <td>
+                    <b>Operador</b>
+                </td>
+                <td>
+                    <b>Precio</b>
+                </td>
+                <td>
+                    <center><b>Eliminar</b></center>
+                </td>
+            </tr>
+            <tr ng-repeat="q in quotations">
+                <td>
+                    {{q.output.service}}
+                </td>
+                <td>
+                    {{q.output.client}}
+                </td>
+                <td>
+                    {{q.output.operator}}
+                </td>
+                <td>
+                    {{q.output.price}}
+                </td>
+                <td>
+                    <center><div class="glyphicon glyphicon-remove-sign clickable-button" ng-click="delete(q.id)" div></div></center>
+                </td>
+            </tr>
+        </table>
+    </div>
+</center>
+

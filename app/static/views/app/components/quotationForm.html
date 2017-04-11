@@ -1,0 +1,15 @@
+<div class="col-lg-4">
+    <div class="pad form-adduser">
+        <center>
+            <div class="inner-title site__title">{{formTitle}}</div>
+            <input id="service" ng-model="$parent.service" type="text" class="form-control" placeholder="Servicio" ng-enter="save()" ng-disabled="$parent.changeMail" >
+            <input id="client" ng-model="$parent.client" type="text" class="form-control repeat-pass" placeholder="Cliente" ng-enter="save()">
+            <input id="operator" ng-model="$parent.operator" type="text" class="form-control repeat-pass" placeholder="Operador" ng-enter="save()">
+            <input id="price" ng-model="$parent.price" type="text" class="form-control" placeholder="Precio" ng-enter="save()">
+        </center>
+        <center>
+            <button id="saveButton" class="btn btn-lg btn-primary btn-block" ng-click="save()" type="button">{{saveButton}}</button>
+            <div id="errorRegistro" style="color: red">{{msg}}</div>
+        </center>
+    </div>
+</div>

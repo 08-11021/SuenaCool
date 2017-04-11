@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="cuerpo">
+    <center>
+        <div class="logo">
+            <img src="src/logo.png">
+        </div>
+        <div class=" col-md-push-4 ">
+            <div class="pad form-signin">
+                <center>
+                    <h2 class="form-signin-heading">Inicia Sesión</h2>
+                </center>
+                <input  type="email" id="inputEmail" ng-model="$parent.$parent.email" class="form-control" placeholder="Correo" ng-enter="authenticate()">
+                <input type="password" id="inputPassword" ng-model="$parent.$parent.password" class="form-control" placeholder="Contraseña" ng-enter="authenticate()">
+                <button class="btn btn-lg btn-primary btn-block butt" ng-click="authenticate()" type="button">Ingresar</button>
+                <center>
+                    <div id="error" style="color: red">{{msg}}</div>
+                </center>
+            </div>
+        </div>
+    </center>
+    </div>
+</div>

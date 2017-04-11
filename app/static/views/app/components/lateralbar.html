@@ -1,0 +1,39 @@
+<div id="template-wrapper">
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li  class="  {{view == 'home' ? 'sidebar-selected':' '}}">
+                    <a href="#home">Inicio</a>
+                </li>
+                <li class="{{view == 'profile' ? 'sidebar-selected':' '}}">
+                    <a href="#profile" ng-if="isOperator">Ver perfil</a>
+                </li>
+                <li class="{{view == 'editProfile' ? 'sidebar-selected':' '}}">
+                    <a href="#editProfile" ng-if="isOperator">Editar perfil</a>
+                </li>
+                <li class= "{{view == 'userList' ? 'sidebar-selected':' '}}">
+                    <a href="#userList" ng-if="isAdmin">Usuarios</a>
+                </li>
+                <li class= "{{view == 'categories' ? 'sidebar-selected':' '}}">
+                    <a href="#categories" ng-if="isManager || isAdmin">Categorias</a>
+                </li>
+                <li class= "{{view == 'services' ? 'sidebar-selected':' '}}">
+                    <a href="#services" ng-if="isClient">Servicios</a>
+                </li>
+                <li class= "{{view == 'suscriptions' ? 'sidebar-selected':' '}}">
+                    <a href="#suscriptions" ng-if="isOperator">Suscripciones</a>
+                </li>
+                <li class= "{{view == 'requests' ? 'sidebar-selected':' '}}">
+                    <a href="#requests" ng-if="isOperator">Solicitudes</a>
+                </li>
+            </ul>
+        </div>
+            <div class="container-fluid">
+            </div>
+    </div>
+</div>
+
+<div class="banner template-container">
+    <img src="src/banner.png">
+</div>
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="eventos">
+    <head><title>SToHTM</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="lib/pace/themes/pace-theme-minimal.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap-css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bsPerso.css">
+        <link rel="stylesheet" type="text/css" href="css/animate.css">
+        <link rel="stylesheet" href="css/angular/ngDialog.min.css">
+        <link rel="stylesheet" href="css/angular/ngDialog-theme-default.min.css">
+        <link rel="stylesheet" href="css/angular/ng-table.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/simple-sidebar.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
+        <script src="/lib/pace/pace.js"></script><style type="text/css"></style>
+        <script type="text/javascript" src="lib/jquery/src/jquery.js"></script>
+        <link rel="stylesheet" href="css/main.css">
+
+
+        <link rel="shortcut icon" href="src/icon.png">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    </head>
+
+<body ng-controller="stohtController_">
+
+    <div class="container">
+      <div class="view-animate-container">
+        <flash:messages class="alert-perso"></flash:messages>
+        <div ng-view class="view-animate"></div>
+      </div>
+
+    </div>
+
+
+    <!-- LOAD ANGULAR -->
+    <script src="lib/bootstrap-css/js/bootstrap.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.5.6/angular-animate.min.js"></script>
+    <script src="http://code.angularjs.org/1.5.6/angular-touch.min.js"></script>
+
+    <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
+
+    <script src="lib/jquery/jquery.layout-latest.min.js"></script>
+    <script src="lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="lib/angular/ng-flash.js"></script>
+    <!-- LOAD APP -->
+    <script src="js/app.js"></script>
+    <script src="js/login/login-service.js"></script>
+    <script src="js/login/login-controller.js"></script>
+    <script src="js/signup/signup-service.js"></script>
+    <script src="js/signup/signup-controller.js"></script>
+    <script src="js/admin/admin-service.js"></script>
+    <script src="js/admin/admin-controller.js"></script>
+    <script src="js/category/category-service.js"></script>
+    <script src="js/category/category-controller.js"></script>
+    <script src="js/user/user-service.js"></script>
+    <script src="js/user/user-controller.js"></script>
+    <script src="js/profile/profile-controller.js"></script>
+    <script src="js/profile/profile-service.js"></script>
+    <script src="js/service/service-controller.js"></script>
+    <script src="js/service/service-service.js"></script>
+    <script src="js/suscription/suscription-controller.js"></script>
+    <script src="js/suscription/suscription-service.js"></script>
+    <script src="js/request/request-controller.js"></script>
+    <script src="js/request/request-service.js"></script>
+    <script src="js/quotation/quotation-controller.js"></script>
+    <script src="js/quotation/quotation-service.js"></script>
+
+</body>
+</html>

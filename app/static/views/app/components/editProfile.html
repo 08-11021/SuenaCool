@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="cuerpo template-container">
+
+
+    <center>
+      <form action="" class="pad user-profile-form">
+      <h2>Edición de perfil de usuario</h2>
+
+      <br>{{profile.email}}
+      <br>
+        <div class="">
+          <div class="row">
+            <div class="col-sm-6">
+              <label><pre>Sexo:        </pre></label>
+            </div>
+            <div class="col-sm-6">
+              <div>
+                <input type="radio" name="sexRadio" value="M" ng-model="profile.gender"> Masculino
+              </div>
+              <div>
+                <input type="radio" name="sexRadio" value="F" ng-model="profile.gender"> Femenino
+              </div>
+            </div>
+          </div>
+        <div class="input-group first-input">
+            <span class="input-group-addon module " >Edad:</span>
+            <div>
+                <input type="number" class="form-control " id="ageInput" ng-model="profile.age">
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Vision:</span>
+            <div>
+                <textarea class="form-control mid-input" id="visionInput" rows="4" ng-model="profile.vision"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Habilidades:</span>
+            <div>
+                <textarea class="form-control mid-input" id="abilitiesInput" rows="4" ng-model="profile.abilities"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Destrezas:</span>
+            <div>
+                <textarea class="form-control mid-input" id="skillsInput" rows="4" ng-model="profile.skills"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Formación:</span>
+            <div>
+                <textarea class="form-control mid-input" id="formation" rows="4" ng-model="profile.formation"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Experiencia:</span>
+            <div>
+                <textarea class="form-control mid-input" id="experienceInput" rows="4" ng-model="profile.experience"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Cursos:</span>
+            <div>
+                <textarea class="form-control mid-input" id="coursesInput" rows="4" ng-model="profile.courses"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Talleres:</span>
+            <div>
+                <textarea class="form-control mid-input" id="workshopsInput" rows="4" ng-model="profile.workshops"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Seminarios:</span>
+            <div>
+              <textarea class="form-control mid-input" id="seminarsInput" rows="4" ng-model="profile.seminars"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Ponencias:</span>
+            <div>
+              <textarea class="form-control mid-input" id="papersInput" rows="4" ng-model="profile.papers"></textarea>
+            </div>
+        </div>
+        <div class="input-group ">
+            <span class="input-group-addon module mid-input" >Publicaciones:</span>
+            <div>
+                <textarea class="form-control mid-input" id="publicationsInput" rows="4" ng-model="profile.publications"></textarea>
+            </div>
+        </div>
+        <div class="input-group last-input ">
+            <span class="input-group-addon module" >Becas:</span>
+            <div>
+                 <textarea class="form-control last-input" id="scholarshipsInput" rows="4" ng-model="profile.scholarships"></textarea>
+            </div>
+        </div>
+
+        <button class="btn btn-md btn-primary btn-block butt" ng-click="sendForm()" type="button">Guardar Cambios</button>
+
+      </form>
+      </center>
+    </div>
+</div>

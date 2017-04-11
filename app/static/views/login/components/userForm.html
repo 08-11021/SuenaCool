@@ -1,0 +1,26 @@
+    <div class="container">
+    <div class=" cuerpo ">
+    	<center>
+            <div class="col-lg-4"></div>
+    		<div class="col-lg-4">
+        <div class="pad form-adduser">
+            <div class="JvYz0">
+                <img src="src/worker.jpg" class="NkN0Fc inner-title" jsname="SRZeM">
+            </div>
+            <div class="inner-title site__title">Regístrate</div>
+            <input id="email" ng-model="$parent.$parent.email" type="email" class="form-control" placeholder="Correo" ng-enter="save()">
+            <input id="name" ng-model="$parent.$parent.fullName" type="text" class="form-control repeat-pass" placeholder="Nombre completo" ng-enter="save()">
+
+            <input id="password" ng-model="$parent.$parent.password" type="password" class="form-control repeat-pass" placeholder="Contraseña" ng-enter="save()">
+            <input id="password2" ng-model="$parent.$parent.passwordr" type="password" class="form-control" placeholder="Repita la contraseña" ng-enter="save()">
+
+            <button id="saveButton" class="btn btn-lg btn-primary btn-block" ng-click="save()" type="button">Aceptar</button>
+            <center>
+
+                <div id="errorRegistro" style="color: red">{{msg}}</div>
+            </center>
+        </div>
+    </div>
+        </center>
+    </div>
+</div>

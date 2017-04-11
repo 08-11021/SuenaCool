@@ -1,0 +1,17 @@
+# You can use this file to install dependencies, just run
+# > pip install -r requirements.txt
+setuptools --no-use-wheel
+flask
+flask-login
+flask-openid
+flask-mail
+sqlalchemy
+flask-sqlalchemy
+sqlalchemy-migrate
+flask-whooshalchemy
+flask-wtf
+pytz
+flask-babel
+Flask-Migrate
+selenium
+nose-parameterized

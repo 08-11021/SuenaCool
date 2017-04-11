@@ -1,0 +1,10 @@
+<div ng-include src="'views/app/components/navbar.html'"></div>
+<div ng-include src="'views/app/components/lateralbar.html'"></div>
+
+<div class="container">
+    <div class=" cuerpo template-container ">
+            <div class="col-lg-4" ng-if="view === 'editUser'"></div>
+            <div ng-include src="'views/app/components/userForm.html'"></div>
+    		<div ng-include src="'views/app/components/userList.html'" ng-if="view === 'userList'"></div>
+    </div>
+</div>

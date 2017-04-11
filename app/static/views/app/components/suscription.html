@@ -1,0 +1,52 @@
+
+    <div class="col-lg-8 col-lg-push-2">
+        <div class="pad form-adduser form-addcategory ">
+                <div class="row">
+                    <div class="col-sm-4">
+                       <button id="saveButton" class="btn btn-lg btn-primary btn-block" ng-click="save(currentNode.categoryName)" type="button">Suscribirse</button>
+                    </div>
+                </div>
+            <div class="row user-profile-category">
+                <div class="col-sm-12">
+                <span style="color:black"><b>Categoria seleccionada: </b>{{currentNode.categoryName}}</span>
+                <h2>Seleccione la categoría a suscribirse</h2>
+
+                        <!--
+                          [TREE attribute]
+                          angular-treeview: the treeview directive
+                          tree-model : the tree model on $scope.
+                          node-id : each node's id
+                          node-label : each node's label
+                          node-children: each node's children
+                        -->
+                        <div
+                          data-angular-treeview="true"
+                          data-tree-model="categoryList"
+                          data-node-id="categoryId"
+                          data-node-label="categoryName"
+                          data-node-children="children" >
+                        </div>
+                </div>
+            </div>
+        </div>
+            <table class="table">
+                <tr>
+                    <td>
+                        <b>Categoría</b>
+                    </td>
+                    <td>
+                        <center><b>Eliminar</b></center>
+                    </td>
+                </tr>
+
+                <tr ng-repeat="suscription in suscriptions">
+                    <td class ="clickable-button">
+                        {{suscription.category}}
+                    </td>
+                    <td>
+                        <center><div class="glyphicon glyphicon-remove-sign clickable-button" ng-click="delete(suscription.id)" div></div></center>
+                    </td>
+                </tr>
+            </table>
+
+    </div>

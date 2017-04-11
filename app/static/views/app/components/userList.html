@@ -1,0 +1,28 @@
+<center>
+    <div class="col-lg-8">
+            <table class="table">
+                <tr>
+                    <td>
+                        <b>Nombre</b>
+                    </td>
+                    <td>
+                        <b>Correo</b>
+                    </td>
+                    <td>
+                        <center><b>Eliminar</b></center>
+                    </td>
+                </tr>
+                <tr ng-repeat="user in users">
+                    <td class ="clickable-button" ng-click="viewUser(user.id)">
+                        {{user.fullName}}
+                    </td>
+                    <td class ="clickable-button" ng-click="viewUser(user.id)">
+                        {{user.email}}
+                    </td>
+                    <td>
+                        <center><div class="glyphicon glyphicon-remove-sign clickable-button" ng-click="delete(user.id)" div></div></center>
+                    </td>
+                </tr>
+            </table>
+    </div>
+ </center>

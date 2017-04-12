@@ -1,6 +1,8 @@
 import logging
-import properties
+
+from app import properties
 from app.models.db import db
+
 
 class Band(db.Model):
     __tablename__ = 'band'

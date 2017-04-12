@@ -1,6 +1,8 @@
 import logging
-import properties
+
+from app import properties
 from app.models.db import db
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -10,7 +12,7 @@ class User(db.Model):
     password = db.Column(db.String(200))
     rol = db.Column(db.Integer)
 
-    def __init__(self, email=None, fullname=None, password=None, rol=None):
+    def __init__(self, email, fullname, password, rol):
         self.email = email
         self.fullname = fullname
         self.password = password
@@ -50,19 +52,24 @@ class User(db.Model):
             if foundUser == None:
                 user = User(email, fullname, password, rol)
                 user.save()
-
-        logging.info('Usuario creado')
+                logging.info('Usuario creado')
+                result = {'status': 'success', 'msg': 'El usuario fue creado exitosamente'}
+            else:
+               result = {'status': 'failure', 'msg': 'El usuario ya existe'}
+        else:
+            result = {'status': 'failure', 'msg': 'Los campos no pueden ser vacios'}
+        return result
 
     def update(self):
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
     def save(self):
         db.session.add(self)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
@@ -70,6 +77,6 @@ class User(db.Model):
         user = self.getUserById(self.id)
         db.session.delete(user)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()

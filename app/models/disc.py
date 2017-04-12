@@ -1,8 +1,11 @@
-import logging
-import properties
 import datetime
-from app.models.db import db
+import logging
+
 from sqlalchemy import and_
+
+from app import properties
+from app.models.db import db
+
 
 class Disc(db.Model):
     __tablename__ = 'disc'

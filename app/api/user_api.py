@@ -1,12 +1,10 @@
 from flask import Blueprint, json, request, session
 
 from app.models.user import User
-from app.models.profile import Profile
 from app.utility.encoder import toMd5
 
 user = Blueprint('user', __name__,)
-
-USER_ROLES = {'admin': 1, 'operator': 2, 'client':4, 'director': 8, 'manager':16, 'budget':32}
+USER_ROLES = {'admin': 1, 'user': 2}
 
 @user.route('/user/create', methods=['POST'])
 def create_user():
@@ -14,11 +12,12 @@ def create_user():
     fullName = request.args.get('fullName')
     rol = request.args.get('rol')
     password = request.args.get('password')
-    if request.args.get('email') is None or len(request.args.get('email')) == 0:
-        res = {'error': 'Debe introducir email y password'}
+
+    if email is None or len(email) == 0:
+        res = {'status': 'failure', 'msg': 'Debe introducir email y password'}
     else:
-        if request.args.get('password') is None or len(request.args.get('password')) == 0:
-            res = {'error': 'Debe introducir email y password'}
+        if password is None or len(password) == 0:
+            res = {'status': 'failure', 'msg': 'Debe introducir email y password'}
         else:
 
             UserInstance = User()
@@ -26,12 +25,7 @@ def create_user():
             result = UserInstance.createUser(
                 email, fullName, encodedPassword, int(rol))
 
-            if result["status"] == "success":
-                ProfileInstance = Profile()
-                profileResult = ProfileInstance.createProfile(email, "", "", "", "", "", "", "",
-                    "", "", "", "", "", "")
-
-            res = result
+            res = {'status': 'success', 'result': result}
 
     return json.dumps(res)
 
@@ -41,16 +35,10 @@ def get_user():
     id = request.args.get('id')
     UserInstance = User()
     result = UserInstance.getUserById(int(id))[0]
-    res = { 'id': result.userId,
-            'rol': result.rol ,
-            'email': result.email,
-            'fullName': result.fullname,
-            'admin': result.rol & USER_ROLES['admin'],
-            'operator': result.rol & USER_ROLES['operator'],
-            'client': result.rol & USER_ROLES['client'],
-            'director': result.rol & USER_ROLES['director'],
-            'manager': result.rol & USER_ROLES['manager'],
-            'budget': result.rol & USER_ROLES['budget']
+    res = {'id': result.userId,
+           'rol': result.rol,
+           'email': result.email,
+           'fullName': result.fullname
             }
 
     return json.dumps(res)
@@ -62,31 +50,52 @@ def get_users():
     users = UserInstance.getUsers()
     result = []
     for user in users:
-        result.append({'id': user.userId, 'fullName': user.fullname,
-                       'email': user.email, 'rol': user.rol})
+        result.append(
+            {'id': user.userId,
+             'fullName': user.fullname,
+             'email': user.email,
+             'rol': user.rol
+             })
+    res = {'status': 'success', 'result': result}
 
-    return json.dumps({'result': result})
+    return json.dumps(res)
 
-@user.route('/user/update', methods=['PUT'])
+@user.route('/user/changePassword', methods=['PUT'])
 def update_user():
     email = request.args.get('email')
     password = request.args.get('password')
+    newPasswordr1 = request.args.get('passwordr1')
+    newPasswordr2 = request.args.get('passwordr2')
     fullname = request.args.get('fullName')
     rol = request.args.get('rol')
-    UserInstance = User()
-    if request.args.get('password') is None or len(request.args.get('password')) == 0:
-        newPassword = None
+
+    passwordLength = not (len(newPasswordr1) == 0 or newPasswordr1 is None)
+    user = User.getUserByEmail(email)
+    if user.password == toMd5(password.encode('utf-8')):
+        if newPasswordr1 == newPasswordr2 and passwordLength:
+            user.password == toMd5(newPasswordr1.encode('utf-8'))
+            user.update()
+            res = {'status': 'success', 'msg': 'La clave ha sido actualizada'}
+        else:
+            res = {'status': 'failure', 'msg': 'Las claves no coinciden'}
     else:
-        newPassword = toMd5(password.encode('utf-8'))
-    result = UserInstance.updateUser(email, fullname, newPassword, rol)
-    return json.dumps({"updated_user": result})
+        res = {'status': 'failure', 'msg': 'Clave invalida'}
+    return json.dumps(res)
 
 
 @user.route('/user/delete', methods=['POST'])
 def delete_user():
     userId = request.args.get('userId')
-    UserInstance = User()
-    result = UserInstance.deleteUser(int(userId))
-    return json.dumps({'deleted_user': result})
+    user = User.getUserById(userId)
+    try:
+        user.delete()
+        result = {'status': 'success', 'msg': 'Usuario eliminado'}
+    except:
+        result = {'status': 'failure', 'msg': 'Error al eliminar el usuario'}
+    return result
+
+
+
+
 
 

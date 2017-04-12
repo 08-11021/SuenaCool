@@ -1,6 +1,8 @@
 import logging
-import properties
+
+from app import properties
 from app.models.db import db
+
 
 class State(db.Model):
     __tablename__ = 'state'
@@ -45,14 +47,14 @@ class State(db.Model):
 
     def update(self):
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
     def save(self):
         db.session.add(self)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
@@ -60,6 +62,6 @@ class State(db.Model):
         state = self.getStateById(self.id)
         db.session.delete(state)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()

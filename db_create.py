@@ -1,11 +1,11 @@
 #!flask/bin/python
 from app.models.db import db
+
 from app.models.user import *
-from app.models.profile import *
-from app.models.category import *
-from app.models.service import *
-from app.models.quotation import *
-from app.models.contract import *
-from app.models.reputation import *
-from app.models.suscription import *
+from app.models.band import *
+from app.models.disc import *
+from app.models.state import *
+from app.models.article import *
+from app.models.new import *
+
 db.create_all()

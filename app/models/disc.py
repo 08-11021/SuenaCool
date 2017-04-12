@@ -1,6 +1,8 @@
 import logging
 import properties
+import datetime
 from app.models.db import db
+from sqlalchemy import and_
 
 class Disc(db.Model):
     __tablename__ = 'disc'
@@ -40,20 +42,20 @@ class Disc(db.Model):
         result = self.query.all()
         return result
 
-    def getDiscByDate(self, startDate, endDate):
+    def getDiscsByDate(self, startDate, endDate):
         logging.info('Obteniendo discos por fecha: %r hasta %r ' % (startDate, endDate))
         if startDate is None:
             discs = self.query.filter(Disc.date <= endDate).all()
         else:
             discs = self.query.filter(and_(Disc.date <= endDate, Disc.date >= startDate)).all()
         return discs
-    
+
     def getDiscsByGenre(self, genre):
         logging.info('Obteniendo discos por genero: %r' % genre)
         discs = self.query.filter_by(disc=disc).all()
         return discs
 
-    def getDiscByScore(self, startScore, endScore):
+    def getDiscsByScore(self, startScore, endScore):
         logging.info('Obteniendo discos por puntuacion: %r hasta %r ' % (startScore, endScore))
         if startScore is None:
             discs = self.query.filter(Disc.score <= endScore).all()
@@ -66,7 +68,7 @@ class Disc(db.Model):
         discs = self.query.filter_by(band=band).all()
         return discs
 
-    def getDiscByName(self, name):
+    def getDiscsByName(self, name):
         logging.info('Obteniendo discos por nombre: %r' % name)
         bands = self.query.filter(Disc.name.like("%name%")).all()
         return bands
@@ -90,14 +92,14 @@ class Disc(db.Model):
 
     def update(self):
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
     def save(self):
         db.session.add(self)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
@@ -105,6 +107,6 @@ class Disc(db.Model):
         disc = self.getDiscById(self.id)
         db.session.delete(disc)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()

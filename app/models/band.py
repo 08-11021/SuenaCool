@@ -8,6 +8,7 @@ class Band(db.Model):
     name = db.Column(db.String(30))
     state = db.Column(db.Integer, db.ForeignKey('state.id'))
     pic = db.Column(db.String(200))
+    review = db.Column(db.String(5000))
 
     def __init__(self, name, state):
         self.name = name
@@ -15,8 +16,8 @@ class Band(db.Model):
 
     def __repr__(self):
         return \
-            '<name %r, state %r, pic %r>' % (
-                self.fullname, self.email, self.password)
+            '<name %r, state %r' % (
+                self.name, self.state)
 
     def createBand(self, name, state):
         logging.info('Creando Banda: %r' % name)
@@ -53,17 +54,20 @@ class Band(db.Model):
 
     def setBandPic(self, pic):
         self.pic = pic
-    
+
+    def setBandReview(self, review):
+        self.review = review
+
     def update(self):
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
     def save(self):
         db.session.add(self)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()
 
@@ -71,6 +75,6 @@ class Band(db.Model):
         band = self.getBandById(self.id)
         db.session.delete(band)
         try:
-            db.session.commit() 
+            db.session.commit()
         except:
             db.session.rollback()

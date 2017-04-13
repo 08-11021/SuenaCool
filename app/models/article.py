@@ -34,15 +34,18 @@ class Article(db.Model):
         checkArticleType = type in properties.articleTypes
 
         if checkArticleType:
-
             article = Article(type, date, title, pic, content)
-            article.save()
+            logging.info('Articulo creado')
+            return article.save()
+        else:
+            logging.info('Error al crear el articulo')
+            return {'status': 'failure', 'msg': 'El articulo no pudo ser creado'}
 
-        logging.info('Articulo creado')
 
-    def getArticles(self):
+
+    def getArticles(self, type):
         logging.info("Obteniendo articulos")
-        result = self.query.all()
+        result = self.query.filter(Article.type.like(type)).all()
         return result
 
     def getArticleById(self, id):
@@ -50,36 +53,42 @@ class Article(db.Model):
         article = self.query.filter_by(id=id).first()
         return article
 
-    def getArticlesByDate(self, startDate, endDate):
+    def getArticlesByDate(self, type, startDate, endDate):
         logging.info('Obteniendo articulos por fecha: %r hasta %r ' % (startDate, endDate))
         if startDate is None:
-            articles = self.query.filter(Article.date <= endDate).all()
+            news = self.query.filter(and_(Article.date <= endDate, Article.type == type)).all()
         else:
-            articles = self.query.filter(and_(Article.date <= endDate, Article.date >= startDate)).all()
+            news = self.query.filter(and_(Article.date <= endDate, Article.date >= startDate, Article.type == type)).all()
         return articles
 
-    def getArticlesByTitle(self, title):
+    def getArticlesByTitle(self, type, title):
         logging.info('Obteniendo articulos por titulo: %r' % title)
-        articles = self.query.filter(Article.name.like("%name%")).all()
+        articles = self.query.filter(and_(Article.name.like("%name%"), Article.type == type)).all()
         return articles
 
     def update(self):
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'El articulo ha sido actualizado'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El articulo no ha podido ser actualizado'}
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'Articulo creado exitosamente'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El articulo no pudo ser creado'}
 
     def delete(self):
         article = self.getBandById(self.id)
         db.session.delete(article)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'El articulo ha sido eliminado'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El articulo no ha podido ser eliminado'}

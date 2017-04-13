@@ -10,11 +10,11 @@ from app.models.db import db
 class Disc(db.Model):
     __tablename__ = 'disc'
     id = db.Column(db.Integer, primary_key=True, index=True)
-    name = db.Column(db.String(60))
-    date = db.Column(db.DateTime, default=datetime.datetime.now())
-    genre = db.Column(db.String(60))
+    name = db.Column(db.String(60))#not null
+    date = db.Column(db.DateTime, default=datetime.datetime.now()) #not null
+    genre = db.Column(db.String(60)) #not null
     score = db.Column(db.Integer)
-    band = db.Column(db.Integer, db.ForeignKey('band.id'))
+    band = db.Column(db.Integer, db.ForeignKey('band.id')) #not null
     cover = db.Column(db.String(200))
     review = db.Column(db.String(5000))
 
@@ -23,6 +23,7 @@ class Disc(db.Model):
         self.date = date
         self.genre = genre
         self.band = band
+        self.score = 0
 
     def __repr__(self):
         return \
@@ -37,8 +38,11 @@ class Disc(db.Model):
 
         if checkLongName and checkGenre:
             disc = Disc(name, date, genre, band)
-            disc.save()
-        logging.info("Disco creado")
+            logging.info("Disco creado")
+            return disc.save()
+        else:
+            logging.info("Error creando disco")
+            return {'status': 'failure', 'msg': 'El disco no pudo ser creado', 'id': self.id}
 
     def getDiscs(self):
         logging.info("Obteniendo discos")
@@ -96,20 +100,27 @@ class Disc(db.Model):
     def update(self):
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'El disco fue actualizado'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El disco no pudo ser actualizado'}
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'El disco fue creado'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El disco no pudo ser creado'}
 
     def delete(self):
         disc = self.getDiscById(self.id)
         db.session.delete(disc)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'El disco fue eliminado'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El disco no pudo ser eliminado'}
+

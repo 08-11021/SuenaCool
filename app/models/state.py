@@ -35,7 +35,7 @@ class State(db.Model):
 
         logging.info('Estado creado')
 
-    def getStatesById(self, id):
+    def getStateById(self, id):
         logging.info('Obteniendo estado por id: %r' % id)
         state = self.query.filter_by(id=id).first()
         return state

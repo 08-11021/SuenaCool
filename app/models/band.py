@@ -7,8 +7,8 @@ from app.models.db import db
 class Band(db.Model):
     __tablename__ = 'band'
     id = db.Column(db.Integer, primary_key=True, index=True)
-    name = db.Column(db.String(30))
-    state = db.Column(db.Integer, db.ForeignKey('state.id'))
+    name = db.Column(db.String(30)) #not null
+    state = db.Column(db.Integer, db.ForeignKey('state.id')) #not null
     pic = db.Column(db.String(200))
     review = db.Column(db.String(5000))
 
@@ -29,9 +29,11 @@ class Band(db.Model):
         if checkBandName:
 
             band = Band(name, state)
-            band.save()
-
-        logging.info('Banda creada')
+            logging.info('Banda creada')
+            return band.save()
+        else:
+            logging.info("Error creando banda")
+            return {'status': 'failure', 'msg': 'La banda no pudo ser creada', 'id': self.id}
 
 
     def getBands(self):
@@ -41,7 +43,7 @@ class Band(db.Model):
 
     def getBandsByStateId(self, state):
         logging.info('Obteniendo bandas por estado: %r' % state)
-        bands = self.query.filter_by(state=state).all()
+        bands = self.query.filter_by(Band.state == state).all()
         return bands
 
     def getBandsByName(self, name):
@@ -51,7 +53,7 @@ class Band(db.Model):
 
     def getBandById(self, id):
         logging.info('Obteniendo banda por id: %r' % id)
-        band = self.query.filter_by(id=id).first()
+        band = self.query.filter_by(Band.id  == id).first()
         return band
 
     def setBandPic(self, pic):
@@ -63,20 +65,26 @@ class Band(db.Model):
     def update(self):
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'La banda fue actualizada'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'La banda no pudo ser actualizada'}
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'La banda fue creada'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'La banda no pudo ser creada'}
 
     def delete(self):
         band = self.getBandById(self.id)
         db.session.delete(band)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'La banda fue eliminada'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'La banda no pudo ser eliminada'}

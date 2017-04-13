@@ -51,32 +51,37 @@ class User(db.Model):
 
             if foundUser == None:
                 user = User(email, fullname, password, rol)
-                user.save()
+                res = user.save()
                 logging.info('Usuario creado')
-                result = {'status': 'success', 'msg': 'El usuario fue creado exitosamente'}
+                return res
             else:
-               result = {'status': 'failure', 'msg': 'El usuario ya existe'}
+                return {'status': 'failure', 'msg': 'El usuario ya existe'}
         else:
-            result = {'status': 'failure', 'msg': 'Los campos no pueden ser vacios'}
-        return result
+            return {'status': 'failure', 'msg': 'Los campos exceden el limite de caracteres'}
 
     def update(self):
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'La informacion de usuario ha sido actualizada'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'La informacion de usuario no ha podido ser actualizada'}
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'El usuario fue creado exitosamente'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El usuario no pudo ser creado'}
 
     def delete(self):
         user = self.getUserById(self.id)
         db.session.delete(user)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'El usuario ha sido eliminado'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'El usuario no pudo ser eliminado'}

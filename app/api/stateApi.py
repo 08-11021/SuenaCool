@@ -1,18 +1,28 @@
-from flask import Blueprint, json, request, session
-from articleApi import *
-from bandApi import *
-from discApi import *
-from newApi import *
-from userApi import *
+from flask import Blueprint, json
+from app.models.state import *
 
 state = Blueprint('state', __name__,)
 
 '''Obtener estado'''
-@state.route('/state', methods=['GET'])
-def getState():
-    return None
+@state.route('/state/<int:id_state>', methods=['GET'])
+def getState(id_state):
+    id = id_state
+    state = State.getStateById(id)
+    res = {'id': state.id,
+           'name': state.name,
+           }
+    return json.dumps(res)
 
 '''Obtener estados'''
 @state.route('/states', methods=['GET'])
 def getStates():
-    return None
+    states = State.getStates()
+    result = []
+    for state in states:
+        result.append(
+            {'id': state.id,
+             'name': state.name,
+             })
+    res = {'status': 'success', 'result': result}
+
+    return json.dumps(res)

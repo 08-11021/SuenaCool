@@ -36,13 +36,18 @@ class New(db.Model):
         if checkNewType:
 
             new = New(type, date, title, pic, content)
-            new.save()
+            res = new.save()
+            logging.info('Noticia creada')
+            return res
+        else:
+            logging.info('Error al crear noticia')
+            return {'status': 'false', 'msg': 'El tipo de la noticia no es valido'}
 
-        logging.info('Noticia creada')
 
-    def getNews(self):
+
+    def getNews(self, type):
         logging.info("Obteniendo noticia")
-        result = self.query.all()
+        result = self.query.filter(New.type.like(type)).all()
         return result
 
     def getNewById(self, id):
@@ -50,36 +55,42 @@ class New(db.Model):
         new = self.query.filter_by(id=id).first()
         return new
 
-    def getNewsByDate(self, startDate, endDate):
+    def getNewsByDate(self, type, startDate, endDate):
         logging.info('Obteniendo noticia por fecha: %r hasta %r ' % (startDate, endDate))
         if startDate is None:
-            news = self.query.filter(New.date <= endDate).all()
+            news = self.query.filter(and_(New.date <= endDate, New.type == type)).all()
         else:
-            news = self.query.filter(and_(New.date <= endDate, New.date >= startDate)).all()
+            news = self.query.filter(and_(New.date <= endDate, New.date >= startDate, New.type == type)).all()
         return news
 
-    def getNewsByTitle(self, title):
+    def getNewsByTitle(self, type, title):
         logging.info('Obteniendo noticia por titulo: %r' % title)
-        news = self.query.filter(New.name.like("%name%")).all()
+        news = self.query.filter(and_(New.name.like("%name%"), New.type == type)).all()
         return news
 
     def update(self):
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'La noticia ha sido actualizada'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'La noticia no ha podido ser actualizada'}
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'Noticia creada exitosamente'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'La noticia no pudo ser creada'}
 
     def delete(self):
         new = self.getBandById(self.id)
         db.session.delete(new)
         try:
             db.session.commit()
+            return {'status': 'success', 'msg': 'La noticia ha sido eliminada'}
         except:
             db.session.rollback()
+            return {'status': 'failure', 'msg': 'La noticia no ha podido ser eliminada'}

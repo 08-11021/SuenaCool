@@ -9,35 +9,35 @@ article = Blueprint('article', __name__,)
 
 '''Crear nuevo articulo'''
 @article.route('/article', methods=['POST'])
-def create_article():
+def createArticle():
     return None
 
 '''Obtener articulo por ID'''
 @article.route('/article', methods=['GET'])
-def get_article():
+def getArticle():
     return None
 
 '''Obtener articulo (por tipo)'''
 @article.route('/articles', methods=['GET'])
-def get_articles():
+def getArticles():
     return None
 
 '''Obtener articulo por fecha'''
 @article.route('/articles/date', methods=['GET'])
-def get_articles_by_date():
+def getArticlesByDate():
     return None
 
 '''Obtener articulo por titulo'''
 @article.route('/articles/title', methods=['GET'])
-def get_articles_by_title():
+def getArticlesByTitle():
     return None
 
 '''Actualizar articulo'''
 @article.route('/article', methods=['PUT'])
-def update_article():
+def updateArticle():
     return None
 
 '''Borrar articulo'''
 @article.route('/article', methods=['DELETE'])
-def delete_article():
+def deleteArticle():
     return None

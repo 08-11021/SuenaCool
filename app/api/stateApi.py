@@ -9,10 +9,10 @@ state = Blueprint('state', __name__,)
 
 '''Obtener estado'''
 @state.route('/state', methods=['GET'])
-def get_state():
+def getState():
     return None
 
 '''Obtener estados'''
 @state.route('/states', methods=['GET'])
-def get_states():
+def getStates():
     return None

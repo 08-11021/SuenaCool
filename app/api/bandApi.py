@@ -9,46 +9,46 @@ band = Blueprint('band', __name__,)
 
 '''Crear nueva banda'''
 @band.route('/band', methods=['POST'])
-def create_band():
+def createBand():
     return None
 
 '''Obtener banda por ID'''
 @band.route('/band', methods=['GET'])
-def get_band():
+def getBand():
     return None
 
 '''Obtener score de banda'''
 @band.route('/band/score', methods=['GET'])
-def get_band_score():
+def getBandScore():
     return None
 
 '''Obtener bandas'''
 @band.route('/bands', methods=['GET'])
-def get_bands():
+def getBands():
     return None
 
 '''Obtener bandas por score'''
 @band.route('/bands/score', methods=['GET'])
-def get_bands_by_score():
+def getBandsByScore():
     return None
 
 '''Obtener bandas por estado'''
 @band.route('/bands/state', methods=['GET'])
-def get_bands_by_state():
+def getBandsByState():
     return None
 
 '''Obtener bandas por nombre'''
 @band.route('/bands/name', methods=['GET'])
-def get_bands_by_name():
+def getBandsByName():
     return None
 
 
 '''Actualizar banda'''
 @band.route('/band', methods=['PUT'])
-def update_band():
+def updateBand():
     return None
 
 '''Borrar banda'''
 @band.route('/band', methods=['DELETE'])
-def delete_band():
+def deleteBand():
     return None

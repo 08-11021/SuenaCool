@@ -9,42 +9,42 @@ disc = Blueprint('disc', __name__,)
 
 '''Crear nuevo disco'''
 @disc.route('/disc', methods=['POST'])
-def create_disc():
+def createDisc():
     return None
 
 '''Obtener disco por ID'''
 @disc.route('/disc', methods=['GET'])
-def get_disc():
+def getDisc():
     return None
 
 '''Obtener score de disco'''
 @disc.route('/disc/score', methods=['GET'])
-def get_disc_score():
+def getDiscScore():
     return None
 
 '''Obtener discos'''
 @disc.route('/discs', methods=['GET'])
-def get_discs():
+def getDiscs():
     return None
 
 '''Obtener discos por fecha'''
 @disc.route('/discs/date', methods=['GET'])
-def get_discs_by_date():
+def getDiscsByDate():
     return None
 
 '''Obtener discos por banda'''
 @disc.route('/news/band', methods=['GET'])
-def get_discs_by_band():
+def getDiscsByBand():
     return None
 
 '''Obtener discos por estado'''
 @disc.route('/news/state', methods=['GET'])
-def get_discs_by_state():
+def getDiscsByState():
     return None
 
 '''Obtener discos por nombre'''
 @disc.route('/news/name', methods=['GET'])
-def get_discs_by_name():
+def getDiscsByName():
     return None
 
 '''Obtener discos por genero'''

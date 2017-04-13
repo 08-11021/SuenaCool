@@ -8,7 +8,7 @@ USER_ROLES = {'admin': 1, 'user': 2}
 
 '''Crear nuevo usuario'''
 @user.route('/user', methods=['POST'])
-def create_user():
+def createUser():
     email = request.args.get('email')
     fullName = request.args.get('fullName')
     rol = request.args.get('rol')
@@ -32,7 +32,7 @@ def create_user():
 
 '''obtener usuario'''
 @user.route('/user', methods=['GET'])
-def get_user():
+def getUser():
     id = request.args.get('id')
     UserInstance = User()
     result = UserInstance.getUserById(int(id))[0]
@@ -46,7 +46,7 @@ def get_user():
 
 '''obtener lista de usuarios'''
 @user.route('/users', methods=['GET'])
-def get_users():
+def getUsers():
     UserInstance = User()
     users = UserInstance.getUsers()
     result = []
@@ -63,7 +63,7 @@ def get_users():
 
 '''cambiar password de usuario'''
 @user.route('/user/changePassword', methods=['PUT'])
-def change_password():
+def changePassword():
     email = request.args.get('email')
     password = request.args.get('password')
     newPasswordr1 = request.args.get('passwordr1')
@@ -84,7 +84,7 @@ def change_password():
 
 '''actualizar informacion de usuario'''
 @user.route('/user', methods=['PUT'])
-def update_user():
+def updateUser():
     email = request.args.get('email')
     password = request.args.get('password')
     fullname = request.args.get('fullName')
@@ -102,7 +102,7 @@ def update_user():
 
 '''borrar usuario'''
 @user.route('/user', methods=['DELETE'])
-def delete_user():
+def deleteUser():
     userId = request.args.get('userId')
     user = User.getUserById(userId)
     try:

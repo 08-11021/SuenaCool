@@ -9,35 +9,35 @@ new = Blueprint('new', __name__,)
 
 '''Crear nueva noticia'''
 @new.route('/new', methods=['POST'])
-def create_new():
+def createNew():
     return None
 
 '''Obtener noticia por ID'''
 @new.route('/new', methods=['GET'])
-def get_new():
+def getNew():
     return None
 
 '''Obtener noticias (por tipo)'''
 @new.route('/news', methods=['GET'])
-def get_news():
+def getNews():
     return None
 
 '''Obtener noticias por fecha'''
 @new.route('/news/date', methods=['GET'])
-def get_news_by_date():
+def getNewsByDate():
     return None
 
 '''Obtener noticias por titulo'''
 @new.route('/news/title', methods=['GET'])
-def get_news_by_title():
+def getNewsByTitle():
     return None
 
 '''Actualizar noticia'''
 @new.route('/new', methods=['PUT'])
-def update_new():
+def updateNew():
     return None
 
 '''Borrar noticia'''
 @new.route('/new', methods=['DELETE'])
-def delete_new():
+def deleteNew():
     return None

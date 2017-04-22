@@ -71,8 +71,9 @@ class Band(db.Model):
             return properties.responseBandNotUpdated
 
     def save(self):
-        db.session.add(self)
         try:
+            db.session.add(self)
+
             db.session.commit()
             return properties.responseBandCreated
         except:

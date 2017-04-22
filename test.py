@@ -1,7 +1,9 @@
 import unittest
+import datetime
 from app.models.user import *
 from app.models.state import *
 from app.models.band import *
+from app.models.disc import *
 from app.utility.encoder import *
 
 class TestModel(unittest.TestCase):
@@ -42,13 +44,28 @@ class TestModel(unittest.TestCase):
         band = Band(bandName, bandState)
         self.assertEqual(band.createBand(bandName,bandState), properties.responseBandCreated, 'Estado insertado correctamente')
         self.assertEqual(band.createBand(bandName2,bandState), properties.responseBandCreated, 'Estado insertado correctamente')
+        self.assertNotEqual(band.getBands(),[], 'Lista de bandas no es vacia')
         self.assertNotEqual(band.getBandsByName('Test'),[],'Bandas consultadas correctamente')
         self.assertNotEqual(band.getBandsByStateId(1), [], 'Bandas consultadas correctamente')
         bands = band.getBandsByStateId(1)
+        bands[0].setBandPic('http://www.picture.com/12345')
+        bands[0].setBandReview('Esto es un review de una banda para probar la actualizacion de la misma. No posee ningun sentido')
+        self.assertEqual(bands[0].update(),properties.responseBandUpdated,'banda actualizada correctamente')
         for band in bands:
             band.delete()
         self.assertEqual(band.getBandsByName('Test'), [], 'Bandas eliminadas correctamente')
         self.assertEqual(band.getBandsByStateId(1), [], 'Bandas eliminadas correctamente')
+
+    def testDiscCRUD(self):
+        bandName = 'Test Band Name'
+        bandState = 1
+        name = 'Disc number 1'
+        date = datetime.date(2017,02,06)
+        genre = 'Rock'
+        disc = Disc('', date, '', '0')
+        band = Band(bandName, bandState)
+        band.createBand(bandName, bandState)
+        self.assertEqual(disc.createDisc(name, date, genre, band.ig), properties.responseDiscCreated, 'Disco creado exitosamente')
 
 if __name__ == '__main__':
     unittest.main()

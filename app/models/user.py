@@ -55,33 +55,35 @@ class User(db.Model):
                 logging.info('Usuario creado')
                 return res
             else:
-                return {'status': 'failure', 'msg': 'El usuario ya existe'}
+                return properties.responseUserAlreadyExist
         else:
-            return {'status': 'failure', 'msg': 'Los campos exceden el limite de caracteres'}
+            return properties.responseUserInvalidAttributes
 
     def update(self):
         try:
             db.session.commit()
-            return {'status': 'success', 'msg': 'La informacion de usuario ha sido actualizada'}
+            return properties.responseUserUpdated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'La informacion de usuario no ha podido ser actualizada'}
+            return properties.responseUserNotUpdated
 
     def save(self):
-        db.session.add(self)
         try:
+            db.session.add(self)
+
             db.session.commit()
-            return {'status': 'success', 'msg': 'El usuario fue creado exitosamente'}
+            return properties.responseUserCreated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'El usuario no pudo ser creado'}
+            return properties.responseUserNotCreated
 
     def delete(self):
-        user = self.getUserById(self.id)
-        db.session.delete(user)
         try:
+            user = self.getUserById(self.id)
+            db.session.delete(user)
+
             db.session.commit()
-            return {'status': 'success', 'msg': 'El usuario ha sido eliminado'}
+            return properties.responseUserDeleted
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'El usuario no pudo ser eliminado'}
+            return properties.responseUserNotDeleted

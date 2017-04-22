@@ -33,7 +33,7 @@ class Band(db.Model):
             return band.save()
         else:
             logging.info("Error creando banda")
-            return {'status': 'failure', 'msg': 'La banda no pudo ser creada', 'id': self.id}
+            return properties.responsaBandNotCreated
 
 
     def getBands(self):
@@ -43,7 +43,7 @@ class Band(db.Model):
 
     def getBandsByStateId(self, state):
         logging.info('Obteniendo bandas por estado: %r' % state)
-        bands = self.query.filter_by(Band.state == state).all()
+        bands = self.query.filter_by(state = state).all()
         return bands
 
     def getBandsByName(self, name):
@@ -53,7 +53,7 @@ class Band(db.Model):
 
     def getBandById(self, id):
         logging.info('Obteniendo banda por id: %r' % id)
-        band = self.query.filter_by(Band.id  == id).first()
+        band = self.query.filter_by(id  = id).first()
         return band
 
     def setBandPic(self, pic):
@@ -65,26 +65,27 @@ class Band(db.Model):
     def update(self):
         try:
             db.session.commit()
-            return {'status': 'success', 'msg': 'La banda fue actualizada'}
+            return properties.responseBandUpdated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'La banda no pudo ser actualizada'}
+            return properties.responseBandNotUpdated
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
-            return {'status': 'success', 'msg': 'La banda fue creada'}
+            return properties.responseBandCreated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'La banda no pudo ser creada'}
+            return properties.responseBandNotCreated
 
     def delete(self):
-        band = self.getBandById(self.id)
-        db.session.delete(band)
         try:
+            band = self.getBandById(self.id)
+            db.session.delete(band)
+
             db.session.commit()
-            return {'status': 'success', 'msg': 'La banda fue eliminada'}
+            return properties.responseBandDeleted
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'La banda no pudo ser eliminada'}
+            return properties.responseBandNotDeleted

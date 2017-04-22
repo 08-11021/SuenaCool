@@ -42,7 +42,7 @@ class Disc(db.Model):
             return disc.save()
         else:
             logging.info("Error creando disco")
-            return {'status': 'failure', 'msg': 'El disco no pudo ser creado', 'id': self.id}
+            return properties.responseDiscNotCreated
 
     def getDiscs(self):
         logging.info("Obteniendo discos")
@@ -59,7 +59,7 @@ class Disc(db.Model):
 
     def getDiscsByGenre(self, genre):
         logging.info('Obteniendo discos por genero: %r' % genre)
-        discs = self.query.filter_by(disc=disc).all()
+        discs = self.query.filter_by(genre = genre).all()
         return discs
 
     def getDiscsByScore(self, startScore, endScore):
@@ -100,27 +100,28 @@ class Disc(db.Model):
     def update(self):
         try:
             db.session.commit()
-            return {'status': 'success', 'msg': 'El disco fue actualizado'}
+            return properties.responseDiscUpdated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'El disco no pudo ser actualizado'}
+            return properties.responseDiscNotUpdated
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
-            return {'status': 'success', 'msg': 'El disco fue creado'}
+            return properties.responseDiscCreated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'El disco no pudo ser creado'}
+            return properties.responseDiscNotCreated
 
     def delete(self):
-        disc = self.getDiscById(self.id)
-        db.session.delete(disc)
         try:
+            disc = self.getDiscById(self.id)
+            db.session.delete(disc)
+
             db.session.commit()
-            return {'status': 'success', 'msg': 'El disco fue eliminado'}
+            return properties.responseDiscDeleted
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'El disco no pudo ser eliminado'}
+            return properties.responseDiscNotDeleted
 

@@ -41,7 +41,7 @@ class New(db.Model):
             return res
         else:
             logging.info('Error al crear noticia')
-            return {'status': 'false', 'msg': 'El tipo de la noticia no es valido'}
+            return properties.responseNewInvalidType
 
 
 
@@ -71,26 +71,27 @@ class New(db.Model):
     def update(self):
         try:
             db.session.commit()
-            return {'status': 'success', 'msg': 'La noticia ha sido actualizada'}
+            return properties.responseNewUpdated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'La noticia no ha podido ser actualizada'}
+            return properties.responseNewNotUpdated
 
     def save(self):
         db.session.add(self)
         try:
             db.session.commit()
-            return {'status': 'success', 'msg': 'Noticia creada exitosamente'}
+            return properties.responseNewCreated
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'La noticia no pudo ser creada'}
+            return properties.responseNewNotCreated
 
     def delete(self):
-        new = self.getBandById(self.id)
-        db.session.delete(new)
         try:
+            new = self.getBandById(self.id)
+            db.session.delete(new)
+
             db.session.commit()
-            return {'status': 'success', 'msg': 'La noticia ha sido eliminada'}
+            return properties.responseNewDeleted
         except:
             db.session.rollback()
-            return {'status': 'failure', 'msg': 'La noticia no ha podido ser eliminada'}
+            return properties.responseNewNotDeleted

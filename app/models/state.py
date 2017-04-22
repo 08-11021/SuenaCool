@@ -37,13 +37,19 @@ class State(db.Model):
 
     def getStateById(self, id):
         logging.info('Obteniendo estado por id: %r' % id)
-        state = self.query.filter_by(id=id).first()
-        return state
+        try:
+            state = self.query.filter_by(id=id).first()
+            return state
+        except:
+            return None
 
     def getStatesByName(self, name):
-        logging.info('Obteniendo estado por nombre: %r' % name)
-        state = self.query.filter_by(name=name).first()
-        return state
+        try:
+            logging.info('Obteniendo estado por nombre: %r' % name)
+            state = self.query.filter(State.name.like("%" + name + "%")).all()
+            return state
+        except:
+            return []
 
     def update(self):
         try:
@@ -52,16 +58,18 @@ class State(db.Model):
             db.session.rollback()
 
     def save(self):
-        db.session.add(self)
         try:
+            db.session.add(self)
+
             db.session.commit()
         except:
             db.session.rollback()
 
     def delete(self):
-        state = self.getStateById(self.id)
-        db.session.delete(state)
         try:
+            state = self.getStateById(self.id)
+            db.session.delete(state)
+
             db.session.commit()
         except:
             db.session.rollback()

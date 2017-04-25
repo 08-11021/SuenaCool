@@ -77,7 +77,7 @@ class Disc(db.Model):
 
     def getDiscsByName(self, name):
         logging.info('Obteniendo discos por nombre: %r' % name)
-        bands = self.query.filter(Disc.name.like("%name%")).all()
+        bands = self.query.filter(Disc.name.like("%"+name+"%")).all()
         return bands
 
     def getDiscById(self, id):

@@ -60,12 +60,31 @@ class TestModel(unittest.TestCase):
         bandName = 'Test Band Name'
         bandState = 1
         name = 'Disc number 1'
+        name2 = 'Disc number 2'
         date = datetime.date(2017,02,06)
         genre = 'Rock'
         disc = Disc('', date, '', '0')
         band = Band(bandName, bandState)
         band.createBand(bandName, bandState)
-        self.assertEqual(disc.createDisc(name, date, genre, band.ig), properties.responseDiscCreated, 'Disco creado exitosamente')
+        self.assertEqual(disc.createDisc(name, date, genre, band.id), properties.responseDiscCreated, 'Disco creado exitosamente')
+        self.assertEqual(disc.createDisc(name2, date, genre, band.id), properties.responseDiscCreated, 'Disco creado exitosamente')
+        self.assertNotEqual(disc.getDiscs(),[],'lista no vacia')
+        self.assertNotEqual(disc.getDiscsByName('Disc number'),[],'Discos consultados satisfactoriamente')
+        self.assertGreaterEqual(len(disc.getDiscsByDate(datetime.date(2017,02,05), datetime.date(2017,02,07))), 2, 'Lista de discos por fecha consultada satisfactoriamente')
+        disc = disc.getDiscsByName('Disc number 1')[0]
+        disc.setDiscCover('http://www.cover.com/1235647')
+        disc.setDiscGenre('pop')
+        disc.setDiscReview('This is a review of a disc, nothing important')
+        disc.setDiscScore(5)
+        self.assertEqual(disc.save(),properties.responseDiscCreated,'Datos del disco actualizados')
+        self.assertGreaterEqual(len(disc.getDiscsByScore(4,6)),1,'Lista de discos por reputacion consultada')
+        self.assertGreaterEqual(len(disc.getDiscsByGenre('pop')),1,'Lista de discos por genero')
+        discs = disc.getDiscsByName('Disc number')
+        for disc in discs:
+            self.assertGreaterEqual(disc.delete(), properties.responseDiscDeleted, 'Lista de discos por genero')
+        band = band.getBandsByName('Test Band Name')[0]
+        band.delete()
+
 
 if __name__ == '__main__':
     unittest.main()

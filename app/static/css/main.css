@@ -1,4 +1,7 @@
-
+@font-face {
+    font-family: suenaCool;
+    src: url(/fonts/suenaCool.ttf);
+}
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
@@ -17,7 +20,7 @@ body {
 }
 
 .cuerpo {
-    margin-top:50px;
+    margin-top:100px;
 }
 
 .template-wrapper {
@@ -66,7 +69,7 @@ body {
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 .navbar{
-    font-family: "Open Sans", Arial;
+    font-family: "suenaCool", Arial;
 }
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
@@ -90,15 +93,40 @@ body {
   width: auto;
 }
 
+.navbar-logo{
+    max-width: 100px;
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
 .navbar-inverse .navbar-nav>li>a {
-  color: #f3e2ce;
+  color: white;
+}
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
+  color: #5d4f6d;
 }
 .navbar-inverse {
-  background-color: #1f0e2a;
-  border-color: #080808;
+background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(63,157,183,1) 45%, rgba(241,92,112,1) 60%, rgba(241,94,111,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(45%, rgba(63,157,183,1)), color-stop(60%, rgba(241,92,112,1)), color-stop(100%, rgba(241,94,111,1)));
+    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(63,157,183,1) 45%, rgba(241,92,112,1) 60%, rgba(241,94,111,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(63,157,183,1) 45%, rgba(241,92,112,1) 60%, rgba(241,94,111,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(63,157,183,1) 45%, rgba(241,92,112,1) 60%, rgba(241,94,111,1) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(63,157,183,1) 45%, rgba(241,92,112,1) 60%, rgba(241,94,111,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f15e6f', GradientType=1 );
+    font-size: 25px;
+    color: white;
+    border: solid 3px white;
+
+}
+.navbar-nav > li > a{
+    line-height: 50px;
+}
+
+.navbar-nav > li{
+    min-height: 83px;
+    border-left: solid 3px white;
 }
 
 .form-signin,
